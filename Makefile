@@ -1,5 +1,5 @@
-CFLAGS = -fPIC -O3 -I. -I/usr/include/libxml2 -I/usr/include/lua5.2 -I/usr/include/python2.7 -I/usr/include/x86_64-linux-gnu/python2.7 \
--I/usr/lib/petscdir/3.7.3/x86_64-linux-gnu-real/include/ -I/usr/lib/openmpi/include/
+CFLAGS = -fPIC -O3 -I. -I/usr/include/libxml2 -I/usr/include/lua5.2 -I/usr/include/python2.7 \
+-I/usr/lib/petscdir/3.10/include/
 CC = gcc
 TARGET = libtfgfem.so.1.0.0
 OBJECTS = triangle.o sparsem.o gauss.o xml.o regions.o mesh.o \
