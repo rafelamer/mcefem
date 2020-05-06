@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem2d>
+	<region filename="rectangle.xml" size="8" />
+	<settings>
+		<lagrange degree="5" />
+		<quadrature1d npoints="100" />
+		<quadrature2d npoints="100" />
+	</settings>
+	<functions>
+		<function name="a" type="matheval">
+			1
+		</function>
+		<function name="b1" type="matheval">
+			0.0
+		</function>
+		<function name="b2" type="matheval">
+			0.0
+		</function>
+		<function name="c" type="matheval">
+			0.0
+		</function>
+		<function name="f" type="matheval">
+			1
+		</function>
+		<function name="d" type="matheval">
+			0.0
+		</function>
+	</functions>
+	<output filename="demo04.txt" type="txt" elementvalues="20" />
+</fem2d>

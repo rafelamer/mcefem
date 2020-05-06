@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+  <region type="path">
+    <point x="0" y="0" bc="2" sbc="3"/>
+    <point x="1" y="0" bc="2" sbc="2"/>
+    <point x="1" y="1" bc="2" sbc="3"/>
+    <point x="0" y="1" bc="2" sbc="2"/>               
+  </region>
+</regions>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+  <region type="path">
+    <curve x="t" y="sqrt(t^3*(4-t))/2" segments="40" begin="0" end="4" bc="2" />
+    <curve x="t" y="-sqrt(t^3*(4-t))/2" segments="40" begin="4" end="0" bc="3"/>		
+  </region>
+</regions>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem1d>
+	<settings>
+		<elements number="30" />
+		<lagrange degree="3" />
+		<quadrature npoints="60" />
+		<interval xa="0" xb="15" />
+	</settings>
+	<boundaries>
+    	<left type="dirichlet" value="300"/>
+    	<right type="dirichlet" value="320.0"  />
+	</boundaries>
+	<functions>
+		<function name="a0" type="matheval">
+			0
+		</function>
+		<function name="a1" type="matheval">
+			0
+		</function>
+		<function name="a2" type="matheval">
+			1
+		</function>
+		<function name="f" type="matheval">
+			0
+		</function>
+	</functions>
+	<output filename="result06.txt" type="txt" elementvalues="8" />
+</fem1d>

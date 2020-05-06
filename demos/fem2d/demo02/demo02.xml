@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem2d>
+	<region filename="unitsquare.xml" size="0.01" />
+	<settings>
+		<lagrange degree="3" />
+		<quadrature1d npoints="100" />
+		<quadrature2d npoints="100" />
+	</settings>
+	<functions>
+		<function name="a" type="matheval">
+			1
+		</function>
+		<function name="b1" type="matheval">
+			0.0
+		</function>
+		<function name="b2" type="matheval">
+			0.0
+		</function>
+		<function name="c" type="matheval">
+			0.0
+		</function>
+		<function name="f" type="matheval">
+			-6
+		</function>
+		<function name="d" type="matheval">
+			1 + x^2 + 2*y^2
+		</function>
+	</functions>
+	<output filename="demo02.txt" type="txt" elementvalues="5" />
+</fem2d>

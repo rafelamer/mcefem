@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem1d>
+	<settings>
+		<elements number="30" />
+		<lagrange degree="12" />
+		<quadrature npoints="60" />
+		<interval xa="0" xb="10" />
+	</settings>
+	<boundaries>
+    	<left type="dirichlet" value="-2.0" />
+    	<right type="dirichlet" value="1.0"  />
+	</boundaries>
+	<functions>
+		<python filename="test" />
+		<function name="a0" type="python" />
+		<function name="a1" type="matheval">
+			0
+		</function>
+		<function name="a2" type="matheval">
+			x^2+1
+		</function>
+		<function name="f" type="python" />
+	</functions>
+	<output filename="result05p.txt" type="txt" elementvalues="24" />
+</fem1d>

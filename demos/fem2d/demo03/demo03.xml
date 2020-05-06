@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem2d>
+	<region filename="unitsquare.xml" size="0.001" />
+	<settings>
+		<lagrange degree="2" />
+		<quadrature1d npoints="100" />
+		<quadrature2d npoints="100" />
+	</settings>
+	<functions>
+		<function name="a" type="matheval">
+			1
+		</function>
+		<function name="b1" type="matheval">
+			0.0
+		</function>
+		<function name="b2" type="matheval">
+			0.0
+		</function>
+		<function name="c" type="matheval">
+			0.0
+		</function>
+		<function name="f" type="matheval">
+			10*exp(-((x - 0.5)^2 + (y - 0.5)^2) / 0.02)
+		</function>
+		<function name="d" type="matheval">
+			0.0
+		</function>
+		<function name="n" type="matheval">
+			sin(5*x)
+		</function>
+	</functions>
+	<output filename="demo03.txt" type="txt" elementvalues="3" />
+</fem2d>

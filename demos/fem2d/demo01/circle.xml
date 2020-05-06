@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+  <region type="circle" bc="2">
+    <center x="0" y="0" radius="1.0" segments="36" />
+  </region>
+</regions>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem2d>
+	<region filename="tube.xml" size="0.03" />
+	<settings>
+		<lagrange degree="3" />
+		<quadrature1d npoints="100" />
+		<quadrature2d npoints="100" />
+	</settings>
+	<functions>
+		<function name="a" type="matheval">
+			43
+		</function>
+		<function name="b1" type="matheval">
+			0.0
+		</function>
+		<function name="b2" type="matheval">
+			0.0
+		</function>
+		<function name="c" type="matheval">
+			-2
+		</function>
+		<function name="f" type="matheval">
+			0.1
+		</function>
+		<function name="A" type="matheval">
+			1
+		</function>
+		<function name="B" type="lua">
+			function B(x,y)
+				if math.sqrt(x^2 + y^2) &gt;= 1.9 then
+					return 0.86
+				end
+				return 0.086
+			end
+		</function>
+		<function name="C" type="lua">
+			function C(x,y)
+				if math.sqrt(x^2 + y^2) &gt;= 1.9 then
+					return 20
+				end
+				return 80
+			end			
+		</function>
+	</functions>
+	<output filename="demo05.txt" type="txt" elementvalues="4" />
+</fem2d>

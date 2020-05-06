@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+  <region type="path">
+    <bezier bc="2" segments="36">
+      <point x="2.9199641" y="0.97078096"/>
+      <point x="3.7070739" y="1.7578879"/>
+      <point x="4.9534341" y="0.25007797"/>
+      <point x="5.7546139" y="0.97078096"/>
+    </bezier>
+    <bezier bc="2" segments="36">
+      <point x="5.7546139" y="0.97078096"/>
+      <point x="6.1408639" y="1.318242"/>
+      <point x="6.0444939" y="1.9165279"/>
+      <point x="5.7546139" y="2.3880879"/>
+    </bezier>
+    <bezier bc="2" segments="36">
+      <point x="5.7546139" y="2.3880879"/>
+      <point x="5.160194" y="3.3549181"/>
+      <point x="4.0570339" y="3.870898"/>
+      <point x="2.9199641" y="3.805428"/>
+    </bezier>
+    <bezier bc="2" segments="36">
+      <point x="2.9199641" y="3.805428"/>
+      <point x="2.3938641" y="3.7751579"/>
+      <point x="1.872265" y="3.6132079"/>
+      <point x="1.502617" y="3.2384779"/>
+    </bezier>
+    <bezier bc="2" segments="36">
+      <point x="1.502617" y="3.2384779"/>
+      <point x="0" y="1.715158"/>
+      <point x="1.949184" y="0"/>
+      <point x="2.9199641" y="0.97078096"/>
+    </bezier>
+  </region>
+  <region type="path">
+    <bezier bc="3" segments="36">
+      <point x="3.477224" y="2.3147279"/>
+      <point x="3.310234" y="2.6039479"/>
+      <point x="3.843944" y="2.8480479"/>
+      <point x="3.697304" y="3.1361279"/>
+    </bezier>
+    <bezier bc="3" segments="36">
+      <point x="3.697304" y="3.1361279"/>
+      <point x="3.6266439" y="3.275078"/>
+      <point x="3.4457839" y="3.2935979"/>
+      <point x="3.2866039" y="3.246208"/>
+    </bezier>
+    <bezier bc="3" segments="36">
+      <point x="3.2866039" y="3.246208"/>
+      <point x="2.960274" y="3.149028"/>
+      <point x="2.7251141" y="2.869418"/>
+      <point x="2.6558241" y="2.534848"/>
+    </bezier>
+    <bezier bc="3" segments="36">
+      <point x="2.6558241" y="2.534848"/>
+      <point x="2.623754" y="2.380038"/>
+      <point x="2.630154" y="2.216288"/>
+      <point x="2.710034" y="2.0801179"/>
+    </bezier>
+    <bezier bc="3" segments="36">
+      <point x="2.710034" y="2.0801179"/>
+      <point x="3.034764" y="1.5264059"/>
+      <point x="3.683124" y="1.9580479"/>
+      <point x="3.477224" y="2.3147279"/>
+    </bezier>
+  </region>
+  <holes>
+    <hole x="3.2033939" y="2.3880879"/>
+  </holes>
+</regions>

@@ -1,0 +1,15 @@
+package "tfgmesh"
+version "1.0"
+purpose "Representation of a triangulation of a 
+two-dimensional domain defined by an XML file
+
+By Rafel Amer <rafel.amer@upc.edu>
+and Eduard Gomez <eduard.gomez.escandell@gmail.com>"
+
+option "infile"     i "XML input file" string
+option "asyfile"    a "Asy file to output the mesh" string optional
+option "size"       s "Size of the triangles" optional float default="0.5"
+option "degree"     d "Degree of the polynomials" optional int default="1"
+option "labels"     l "Write labels for unknowns" flag off
+option "unitsize"   u "Unit size in the asy file" optional float default="1"
+option "info"       n "Show information about the mesh" flag off

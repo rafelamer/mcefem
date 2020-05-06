@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+  <region type="polygon" bc="4">
+      <point x="0" y="0" />
+      <point x="8" y="0" />
+      <point x="8" y="4" />
+      <point x="0" y="4" />
+  </region>
+</regions>

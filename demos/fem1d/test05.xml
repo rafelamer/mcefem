@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem1d>
+	<settings>
+		<elements number="30" />
+		<lagrange degree="8" />
+		<quadrature npoints="60" />
+		<interval xa="0" xb="6" />
+	</settings>
+	<boundaries>
+    	<left type="robin" A="3.0" B="-2.0" C="1.0" />
+    	<right type="neumann" value="0.0"  />
+	</boundaries>
+	<functions>
+		<function name="a0" type="lua">
+			function a0(x)
+				if x &lt;= 2.0 then
+					return -0.1*((x-1)^2-0.5)
+				end
+				if x &lt;= 4.0 then
+					return -0.1*((x-3)^2-0.5)
+				end
+				if x &lt;= 6.0 then
+					return -0.1*((x-5)^2-0.5)
+				end
+			end
+		</function>
+		<function name="a1" type="matheval">
+			1
+		</function>
+		<function name="a2" type="matheval">
+			x^2+1
+		</function>
+		<function name="f" type="lua">
+			function f(x)
+				return 0.5*math.floor(x+1)
+			end
+		</function>
+	</functions>
+	<output filename="result05.txt" type="txt" elementvalues="24" />
+</fem1d>

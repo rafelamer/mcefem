@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fem1d>
+	<settings>
+		<elements number="30" />
+		<lagrange degree="4" />
+		<quadrature npoints="60" />
+		<interval xa="-3.1415926536" xb="3.1415926536" />
+	</settings>
+	<boundaries>
+    	<left type="robin" A="3.0" B="-2.0" C="1.0" />
+    	<right type="neumann" value="1.0"  />
+	</boundaries>
+	<functions>
+		<function name="a0" type="matheval">
+			2*cos(x/2)
+		</function>
+		<function name="a1" type="matheval">
+			2
+		</function>
+		<function name="a2" type="matheval">
+			x^2+1
+		</function>
+		<function name="f" type="matheval">
+			x^2
+		</function>
+	</functions>
+	<output filename="result04.txt" type="txt" elementvalues="12" />
+</fem1d>

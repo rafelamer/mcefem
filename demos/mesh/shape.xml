@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+  <region type="ellipse" bc="4">
+    <center x="0" y="0" ax="3.0" ay="8.0" segments="60" rotate="45"/>
+  </region>
+  <region type="ellipse" bc="3" >
+    <center x="-2" y="2" ax="2" ay="1.0" segments="36" rotate="45" />
+  </region>
+  <region type="ellipse" bc="2">
+    <center x="2" y="-2" ax="2" ay="1.0" segments="36" rotate="45" />
+  </region>
+  <holes>
+    <hole x="-2"  y="2" />
+    <hole x="2"  y="-2" />
+  </holes>
+</regions>

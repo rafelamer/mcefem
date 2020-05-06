@@ -1,0 +1,12 @@
+package "tfggem"
+version "1.0"
+purpose "Solution of a Partial Diffential Equation by 
+the Finite Element Method in dimensions 1 and 2
+
+By Rafel Amer <rafel.amer@upc.edu>
+and Eduard Gomez <eduard.gomez.escandell@gmail.com>"
+
+option "dimension"  d "Dimension of the problem" int values="1","2"
+option "infile"     i "XML input file" string
+option "asyfile"    a "Asy file to output the mesh" string optional
+option "solver"     s "Solver used" string values="gsl","petsc","umfpack"

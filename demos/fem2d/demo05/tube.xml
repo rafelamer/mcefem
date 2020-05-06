@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regions>
+  <region type="circle" bc="4">
+    <center x="0" y="0" radius="2.0" segments="36" />
+  </region>
+  <region type="circle" bc="4">
+    <center x="0.8" y="0" radius="0.8" segments="16" />
+  </region>
+  <holes>
+    <hole x="0.8" y="0"/>
+  </holes>
+</regions>
