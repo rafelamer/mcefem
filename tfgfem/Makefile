@@ -1,4 +1,4 @@
-CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/lib/petscdir/3.7.3/x86_64-linux-gnu-real/include/ -I/usr/lib/openmpi/include/ $(shell python-config --cflags) $(shell python-config --ldflags)
+CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/lib/petscdir/3.10/include/ -I/usr/lib/x86_64-linux-gnu/openmpi/include/ $(shell python-config --cflags) $(shell python-config --ldflags)
 LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua5.2 -lut -lpython2.7 -lgsl -lpetsc -lmpi
 LDFLAGS = -L/usr/local/lib/
 CC = gcc

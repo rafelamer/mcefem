@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 		goto final;
 
 	if (asyfile != NULL)
-		mesh_to_asy(spec2d->mesh,spec2d->degree,asyfile);
+		mesh_to_asy(spec2d->mesh,spec2d->degree,asyfile,1.0,0);
 
 	if ((system = StiffnessMatrixAndLoadVector2D(spec2d)) == NULL)
 		goto final;
