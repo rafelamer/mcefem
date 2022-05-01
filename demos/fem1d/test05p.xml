@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fem1d>
 	<settings>
-		<elements number="30" />
-		<lagrange degree="8" />
-		<quadrature npoints="60" />
+		<elements number="20" />
+		<lagrange degree="12" />
+		<quadrature npoints="40" />
 		<interval xa="0" xb="6" />
 	</settings>
 	<boundaries>
