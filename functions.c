@@ -31,13 +31,15 @@ PyObject *Py_Initialize_Functions(char *programname,char *filename)
 	char *path = ".";
 	wchar_t *pathName = Py_DecodeLocale(path, NULL);
 	PyObject *fName = PyUnicode_FromString(filename);
-	Py_SetProgramName(program);
-	Py_Initialize();
+	PyConfig config;
+	PyConfig_InitPythonConfig(&config);
+	config.isolated = 1;
+	config.program_name = program;
+	Py_InitializeFromConfig(&config);
 	PyRun_SimpleString(
    "import sys\n"
    "sys.path.append('.')\n"
   );
-	// PySys_SetPath(pathName);
 	pModule = PyImport_ImportModule(filename);
 	if(pModule == NULL)
 		PyErr_Print();
