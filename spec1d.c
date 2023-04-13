@@ -1,11 +1,11 @@
 /**************************************************************************************
 * Filename:   spec1d.c
-* Authors:     
-* Copyright:  
-* Disclaimer: This code is presented "as is" and it has been written to 
+* Authors:
+* Copyright:
+* Disclaimer: This code is presented "as is" and it has been written to
 *             implement the Finite Element Method in dimensions 1 and 2.
 *             It has been writen educational purposes.
-*	    
+*
 * License:    This library  is free software; you can redistribute it and/or
 *             modify it under the terms of either:
 *
@@ -73,7 +73,7 @@ static int parseBoundaries(xmlNodePtr node,Specification1D spec)
 		else if (AREEQUAL(cur->name,"right"))
 		{
 			type = get_string_value(cur,"type",&found,XML_VALUE_REQUIRED);
-			index = 1;	
+			index = 1;
 			right++;
 		}
 		else
@@ -87,7 +87,7 @@ static int parseBoundaries(xmlNodePtr node,Specification1D spec)
 		if (LCAREEQUAL(type,"neumann"))
 		{
 			spec->bc[index][0] = get_double_value(cur,"value",&found,XML_VALUE_REQUIRED);
-			spec->bctype[index] = FEM_BC_NEUMANN;	
+			spec->bctype[index] = FEM_BC_NEUMANN;
 		}
 		if (LCAREEQUAL(type,"robin"))
 		{
@@ -104,7 +104,7 @@ static int parseBoundaries(xmlNodePtr node,Specification1D spec)
 	if ((left != 1) || (right != 1))
 		goto final;
 	error = 0;
-final:	
+final:
 	return error;
 }
 
@@ -276,7 +276,7 @@ static int parseSettings(xmlNodePtr node,Specification1D spec)
 static void parseOutput(xmlNodePtr node,Specification1D spec)
 {
 	int found;
-	xmlChar *value; 
+	xmlChar *value;
 
 	value = get_string_value(node,"type",&found,XML_VALUE_REQUIRED);
 	strncpy(spec->type,value,63);

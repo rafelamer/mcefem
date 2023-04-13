@@ -1,11 +1,11 @@
 /**************************************************************************************
 * Filename:   functions.c
-* Authors:     
-* Copyright:  
-* Disclaimer: This code is presented "as is" and it has been written to 
+* Authors:
+* Copyright:
+* Disclaimer: This code is presented "as is" and it has been written to
 *             implement the Finite Element Method in dimensions 1 and 2.
 *             It has been writen educational purposes.
-*	    
+*
 * License:    This library  is free software; you can redistribute it and/or
 *             modify it under the terms of either:
 *
@@ -26,20 +26,29 @@
 
 PyObject *Py_Initialize_Functions(char *programname,char *filename)
 {
-	PyObject *pModule, *pName;
-
-	Py_SetProgramName(programname);
+	PyObject *pModule = NULL;
+  wchar_t *program = Py_DecodeLocale(programname, NULL);
+	char *path = ".";
+	wchar_t *pathName = Py_DecodeLocale(path, NULL);
+	PyObject *fName = PyUnicode_FromString(filename);
+	Py_SetProgramName(program);
 	Py_Initialize();
-	PySys_SetPath(".");
-	pName = PyString_FromString(filename);
-	pModule = PyImport_Import(pName);
-
-	Py_DECREF(pName);
+	PyRun_SimpleString(
+   "import sys\n"
+   "sys.path.append('.')\n"
+  );
+	// PySys_SetPath(pathName);
+	pModule = PyImport_ImportModule(filename);
+	if(pModule == NULL)
+		PyErr_Print();
+	Py_DECREF(pathName);
+	Py_DECREF(fName);
+	Py_DECREF(program);
 	return pModule;
 }
 
 void Py_Finalize_Functions(PyObject *module)
-{ 
+{
 	Py_DECREF(module);
 	Py_Finalize();
 }
@@ -65,7 +74,7 @@ final:
 			free(new);
 		fprintf(stderr,"Error generating a C function %s\n",name);
 		exit(EXIT_FAILURE);
-	}	
+	}
 }
 
 void add_cfunction2d(FunctionTable *hash,char *name,FunctionXY f)
@@ -89,7 +98,7 @@ final:
 			free(new);
 		fprintf(stderr,"Error generating a C function %s\n",name);
 		exit(EXIT_FAILURE);
-	}	
+	}
 }
 
 void add_mathevaluator(FunctionTable *hash,char *name,char *function)
@@ -129,7 +138,7 @@ void add_luafunction(FunctionTable *hash,char *name,lua_State *Lua,char *functio
 	strncpy(new->name,name,127);
 	new->type = LUAFUNCTION;
 	new->Lua = Lua;
-	
+
 	if (luaL_loadbuffer(Lua,function,strlen(function),name) != 0)
 		goto final;
 	if (lua_pcall(Lua, 0, 0, 0) != 0)
@@ -192,7 +201,7 @@ DOUBLE callFunctionTable1D(FunctionTable hash,char *name,DOUBLE x)
 		DOUBLE r;
 		lua_getglobal(item->Lua,item->name);
 		if (lua_isnil(item->Lua, -1))
-			goto final; 
+			goto final;
 		lua_pushnumber(item->Lua,x);
 		lua_pcall(item->Lua,1,1,0);
 		r = lua_tonumber(item->Lua,-1);
@@ -236,7 +245,7 @@ DOUBLE callFunctionTable2D(FunctionTable hash,char *name,DOUBLE x,DOUBLE y)
 		DOUBLE r;
 		lua_getglobal(item->Lua,item->name);
 		if (lua_isnil(item->Lua, -1))
-			goto final; 
+			goto final;
 		lua_pushnumber(item->Lua,x);
 		lua_pushnumber(item->Lua,y);
 		lua_pcall(item->Lua,2,1,0);
@@ -279,7 +288,7 @@ DOUBLE runFunctionTable1D(FunctionTable item,DOUBLE x)
 		DOUBLE r;
 		lua_getglobal(item->Lua,item->name);
 		if (lua_isnil(item->Lua, -1))
-			goto final; 
+			goto final;
 		lua_pushnumber(item->Lua,x);
 		lua_pcall(item->Lua,1,1,0);
 		r = lua_tonumber(item->Lua,-1);
@@ -319,7 +328,7 @@ DOUBLE runFunctionTable2D(FunctionTable item,DOUBLE x,DOUBLE y)
 		DOUBLE r;
 		lua_getglobal(item->Lua,item->name);
 		if (lua_isnil(item->Lua, -1))
-			goto final; 
+			goto final;
 		lua_pushnumber(item->Lua,x);
 		lua_pushnumber(item->Lua,y);
 		lua_pcall(item->Lua,2,1,0);

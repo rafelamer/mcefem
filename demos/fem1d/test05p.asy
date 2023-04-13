@@ -6,8 +6,8 @@ usepackage("mtpro2");
 
 unitsize(1.75cm);
 
-picture e = axes(0,10,-3,3);
-picture g = grid(0,10,-3,3);
+picture e = axes(0,6,0,10);
+picture g = grid(0,6,0,10);
 add(g);
 add(e);
 

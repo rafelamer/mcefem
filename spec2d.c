@@ -1,11 +1,11 @@
 /**************************************************************************************
 * Filename:   spec2d.c
-* Authors:     
-* Copyright:  
-* Disclaimer: This code is presented "as is" and it has been written to 
+* Authors:
+* Copyright:
+* Disclaimer: This code is presented "as is" and it has been written to
 *             implement the Finite Element Method in dimensions 1 and 2.
 *             It has been writen educational purposes.
-*	    
+*
 * License:    This library  is free software; you can redistribute it and/or
 *             modify it under the terms of either:
 *
@@ -48,7 +48,7 @@ final:
 
 static int parseRegion(xmlNodePtr node,Specification2D spec,DataRegion *rg,DOUBLE *size)
 {
-	int found, error; 
+	int found, error;
 	xmlChar *value;
 
   	error = 1;
@@ -58,7 +58,7 @@ static int parseRegion(xmlNodePtr node,Specification2D spec,DataRegion *rg,DOUBL
 		goto final;
 
 	*size = get_double_value(node,"size",&found,XML_VALUE_REQUIRED);
-	
+
 	error = 0;
 
 final:
@@ -142,7 +142,7 @@ static int parseFunctions(xmlDocPtr doc,xmlNodePtr node,Specification2D spec)
 {
 	xmlNodePtr cur;
 	int a = 0, b1 = 0, b2 = 0, c = 0, f = 0;
-	int d = 0, n = 0, rA = 0, rB = 0, rC = 0; 
+	int d = 0, n = 0, rA = 0, rB = 0, rC = 0;
 
 	cur = node->xmlChildrenNode;
 	while (cur != NULL)
@@ -224,7 +224,7 @@ static int parseFunctions(xmlDocPtr doc,xmlNodePtr node,Specification2D spec)
 			else if (AREEQUAL(name,"B"))
 				rB++;
 			else if (AREEQUAL(name,"C"))
-				rC++;			
+				rC++;
 			else
 				error = 1;
 
@@ -248,7 +248,7 @@ static int parseFunctions(xmlDocPtr doc,xmlNodePtr node,Specification2D spec)
 static void parseOutput(xmlNodePtr node,Specification2D spec)
 {
 	int found;
-	xmlChar *value; 
+	xmlChar *value;
 
 	value = get_string_value(node,"type",&found,XML_VALUE_REQUIRED);
 	strncpy(spec->type,value,63);

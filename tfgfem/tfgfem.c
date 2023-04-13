@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 		ret = EXIT_SUCCESS;
 		goto final;
 	}
-	
+
 	infile = ai.infile_arg;
 	dimension = ai.dimension_arg;
 	solver = ai.solver_arg;
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 			goto final;
 
 		if (!strcmp("umfpack",solver))
-		{	
+		{
 			if ((s1 = umfpack_solve(system->K,system->F)) == NULL)
 				goto final;
 
@@ -53,32 +53,32 @@ int main(int argc, char **argv)
 					goto final;
 
 			ret = EXIT_SUCCESS;
-			goto final;	
+			goto final;
 		}
 
 		if (!strcmp("gsl",solver))
 		{
 			if ((s3 = gsl_gmres_solve(system)) == NULL)
 				goto final;
-			
+
 			if ( !strcmp("txt",spec1d->type))
 				if ( !writeFEM1DSolutionTXTType(gsl_vector_ptr(s3,0),spec1d))
 					goto final;
 
 			ret = EXIT_SUCCESS;
-			goto final;	
+			goto final;
 		}
 
 		if (!strcmp("petsc",solver))
 		{
-			if ((s2 = petsc_solve(system)) == NULL)
+			if (petsc_solve(system,&s2) != 0)
 				goto final;
 
 			if ( !strcmp("txt",spec1d->type))
 				if ( !writeFEM1DPETScSolutionTXTType(s2,spec1d))
 					goto final;
 			ret = EXIT_SUCCESS;
-			goto final;		
+			goto final;
 		}
 		goto final;
 	}
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
 
 	if (!strcmp("petsc",solver))
 	{
-		if ((s2 = petsc_solve(system)) == NULL)
+		if (petsc_solve(system,&s2) != 0)
 			goto final;
 
 		if ( !strcmp("txt",spec2d->type))
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 	}
 
 	ret = EXIT_SUCCESS;
-	
+
 final:
 	if (ret != EXIT_SUCCESS)
 		printf("Something wrong ocurred during the solution of the problem\n");

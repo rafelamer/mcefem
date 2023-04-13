@@ -1,11 +1,11 @@
 /**************************************************************************************
 * Filename:   fem1d.c
-* Authors:     
-* Copyright:  
-* Disclaimer: This code is presented "as is" and it has been written to 
+* Authors:
+* Copyright:
+* Disclaimer: This code is presented "as is" and it has been written to
 *             implement the Finite Element Method in dimensions 1 and 2.
 *             It has been writen educational purposes.
-*	    
+*
 * License:    This library  is free software; you can redistribute it and/or
 *             modify it under the terms of either:
 *
@@ -30,7 +30,7 @@ void free_system_of_equations(SystemOfEquations *s)
 	if (*s == NULL)
 		return;
 	freeSparseMatrix((*s)->K);
-	if ((*s)->F != NULL) 
+	if ((*s)->F != NULL)
 		free_vector((*s)->F);
 	free(*s);
 	*s = NULL;
@@ -47,8 +47,8 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 
 	/*
 		The number of unknowns is
-		The number of points: spec->elements * spec->degree + 1 
-		plus 2: u'(spec->xa) and u'(spec->xb)  
+		The number of points: spec->elements * spec->degree + 1
+		plus 2: u'(spec->xa) and u'(spec->xb)
 	*/
 	unknowns = spec->elements * spec->degree + 3;
 	degree = spec->degree;
@@ -59,7 +59,7 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 	HASH_FIND_STR(spec->funs,"a0",a0);
 	HASH_FIND_STR(spec->funs,"f",f);
 
-	if ((a2 == NULL) || (a1 == NULL) || (a0 == NULL) || (f == NULL)) 
+	if ((a2 == NULL) || (a1 == NULL) || (a0 == NULL) || (f == NULL))
 		goto error_malloc;
 
 	if ((s = (SystemOfEquations)malloc(sizeof(system_of_equations))) == NULL)
@@ -88,7 +88,7 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 			int n;
 			/*
 				Computation of the load vector s->F[degree * k + i]
-				r1 = \int_{xa}^{xb} f(x) \phi_{degree * k + i}(x) dx 
+				r1 = \int_{xa}^{xb} f(x) \phi_{degree * k + i}(x) dx
 			*/
 			q = spec->qdat;
 			r = 0.0;
@@ -156,10 +156,10 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 						if (! triplet_form_append_element(t,r4,degree * k + j,degree * k + i))
 							goto error_malloc;
 				}
-			} 
+			}
 		}
 	}
-	
+
 	/*
 		Additional unknowns u'(spec->xa) and u'(spec->xb)
 	 */
@@ -167,7 +167,7 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 		goto error_malloc;
 	if (! triplet_form_append_element(t,- runFunctionTable1D(a2,spec->xb),unknowns - 3,unknowns - 1))
 		goto error_malloc;
-	
+
 	/*
 		Left boundary conditions: Penultimate equation
 	*/
@@ -230,8 +230,8 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 error_malloc:
 	if (error == 1)
 		freeSystemOfEquations(s);
-	freeTripletForm(t);	
-	return s; 
+	freeTripletForm(t);
+	return s;
 }
 
 int writeFEM1DSolutionTXTType(DOUBLE *s,Specification1D spec)
@@ -257,7 +257,7 @@ int writeFEM1DSolutionTXTType(DOUBLE *s,Specification1D spec)
 		DOUBLE x;
 		xa = spec->xa + k * p;
 		for (j = 0;j < spec->elementvalues - 1;j++)
-		{   
+		{
 			DOUBLE x, y;
 			y = 0.0;
 			x = xa + j * q;
@@ -267,15 +267,15 @@ int writeFEM1DSolutionTXTType(DOUBLE *s,Specification1D spec)
 			{
 				fprintf(stderr,"Error writing to file %s\n",spec->filename);
 				exit(EXIT_FAILURE);
-			}		
+			}
 		}
-		s += spec->degree; 
+		s += spec->degree;
 	}
 	if (fprintf(fp,"%.16g\t%.16g\n",spec->xb,s[0]) < 0)
 	{
 		fprintf(stderr,"Error writing to file %s\n",spec->filename);
 		exit(EXIT_FAILURE);
-	}	
+	}
 	ret = 1;
 
 final:
@@ -308,7 +308,7 @@ int writeFEM1DPETScSolutionTXTType(PetscScalar *s,Specification1D spec)
 		DOUBLE x;
 		xa = spec->xa + k * p;
 		for (j = 0;j < spec->elementvalues - 1;j++)
-		{   
+		{
 			DOUBLE x, y;
 			y = 0.0;
 			x = xa + j * q;
@@ -318,15 +318,15 @@ int writeFEM1DPETScSolutionTXTType(PetscScalar *s,Specification1D spec)
 			{
 				fprintf(stderr,"Error writing to file %s\n",spec->filename);
 				exit(EXIT_FAILURE);
-			}		
+			}
 		}
-		s += spec->degree; 
+		s += spec->degree;
 	}
 	if (fprintf(fp,"%.16g\t%.16g\n",spec->xb,s[0]) < 0)
 	{
 		fprintf(stderr,"Error writing to file %s\n",spec->filename);
 		exit(EXIT_FAILURE);
-	}	
+	}
 	ret = 1;
 
 final:

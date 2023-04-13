@@ -1,6 +1,6 @@
-CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/lib/petscdir/3.10/include/ -I/usr/lib/x86_64-linux-gnu/openmpi/include/ $(shell python-config --cflags) $(shell python-config --ldflags)
-LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua5.2 -lut -lpython2.7 -lgsl -lpetsc -lmpi
-LDFLAGS = -L/usr/local/lib/
+CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/include/petsc $(shell python3-config --cflags) $(shell python3-config --ldflags)
+LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua -lpython3.10 -lgsl -lpetsc -lmpi
+LDFLAGS = -L/usr/local/lib -L/usr/lib64/openmpi/lib/ 
 CC = gcc
 TARGET = tfgfem
 OBJECTS = tfgfem.o cmdline.o
@@ -20,4 +20,4 @@ install: $(TARGET)
 	cp $(TARGET) /usr/local/bin/
 
 clean:
-	rm -f $(OBJECTS) cmdline.[ch] $(TARGET) 
+	rm -f $(OBJECTS) cmdline.[ch] $(TARGET)

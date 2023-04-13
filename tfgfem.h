@@ -1,11 +1,11 @@
 /**************************************************************************************
 * Filename:   tfgfem.h
-* Authors:     
-* Copyright:  
-* Disclaimer: This code is presented "as is" and it has been written to 
+* Authors:
+* Copyright:
+* Disclaimer: This code is presented "as is" and it has been written to
 *             implement the Finite Element Method in dimensions 1 and 2.
 *             It has been writen for educational purposes.
-*	    
+*
 * License:    This library  is free software; you can redistribute it and/or
 *             modify it under the terms of either:
 *
@@ -31,17 +31,19 @@
 #include <suitesparse/umfpack.h>
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
-#include <lua5.2/lua.h>
-#include <lua5.2/lauxlib.h>
-#include <lua5.2/lualib.h>
+#include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
 #include <uthash.h>
-#include <Python.h>
 #include <gsl/gsl_spmatrix.h>
 #include <gsl/gsl_vector.h>
 #include <petscksp.h>
 
+#define PY_SSIZE_T_CLEAN
+#include <Python.h>
+
 #define DOUBLE double
-#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#define max(a,b)    (((a) > (b)) ? (a) : (b))
 
 /*************************************************************
  *
@@ -131,7 +133,7 @@
 		make_vector((a)[make_matrix_loop_counter],                                  \
 			(n) - make_matrix_loop_counter );		                                \
 	(a)[n] = NULL;                                                                  \
-} while (0)  
+} while (0)
 
 #define matrix_to_vector(a,v,m,n,type) do {                                         \
 	type *matrix_vector_pointer;                                                    \
@@ -170,7 +172,7 @@ xmlChar *get_string_value(xmlNodePtr node,char *name,int *found,int optional);
 xmlChar *get_string_content(xmlDocPtr doc,xmlNodePtr node);
 
 /*************************************************************
- * 
+ *
  * A region or domain in dimension 2 is a collections a closed
  * curves. For each curve we have to say if it represents a hole
  * in the doman.
@@ -202,7 +204,7 @@ typedef struct {
 	data_segment *segments;
 	data_hole *holes;
 	int npoints;
-	int nsegments; 
+	int nsegments;
 	int nholes;
 } data_region;
 typedef data_region *DataRegion;
@@ -217,11 +219,11 @@ void print_region(DataRegion r);
 
 /*************************************************************
  *
- * Triangulating a planar polygonal domain means dividing the domain 
+ * Triangulating a planar polygonal domain means dividing the domain
  * into a union of triangles so that
  *    1. every triangle has a nonempty interior;
  *    2. no two triangles have common interior parts; and
- *    3. any side of any triangle is either a part of the domain’s 
+ *    3. any side of any triangle is either a part of the domain’s
  *       boundary or is the side of another triangle.
  *
  * A triangulated domain is also called a triangular mesh.
@@ -303,7 +305,7 @@ void node_coordinates_at_edge(PEdge edge,int degree,int m,PNode r);
  * Gauss quadrature in dimensions 1 and 2
  *
  * The points and weights are defined in the interval [-1,1] in
- * dimension 1 or in the triangle with vertices (0,0) 
+ * dimension 1 or in the triangle with vertices (0,0)
  * (1,0) and (0,1) when the dimension is 2.
  *
  *************************************************************/
@@ -338,10 +340,10 @@ DOUBLE twb_integrate_mesh_evaluator(DataMesh mesh,void *evaluator,int degree);
  *	Lagrange polynomials in dimensions 1 and 2
  *  They are defined in the interval [0,1] or in the triangle
  *  with vertices (0,0) (1,0) and (0,1)
- * 
+ *
  *************************************************************/
 typedef struct {
-	DOUBLE value; 
+	DOUBLE value;
 	DOUBLE dvalue; /* derivative of Lagrange polynomial */
 } lagrange_1d_values;
 typedef lagrange_1d_values **Lagrange1DValues;
@@ -381,7 +383,7 @@ Lagrange2DValues LagrangeAtPointsInBasicTriangle(int degree,int npoints);
  * Direct Methods for Sparse Linear Systems
  * Timothy A. Davis
  * ISBN: 978-0898716139
- * SIAM 2006 
+ * SIAM 2006
  *
  *************************************************************/
 typedef struct {
@@ -395,7 +397,7 @@ typedef struct {
 } sparse_matrix;
 typedef sparse_matrix *SparseMatrix;
 
-typedef struct { 
+typedef struct {
   unsigned int row;
   unsigned int col;
   DOUBLE value;
@@ -441,7 +443,7 @@ DOUBLE *umfpack_solve(SparseMatrix r,DOUBLE *b);
 
 /*************************************************************
  *
- * Different types of functions used. 
+ * Different types of functions used.
  *   1. Matheval evaluators
  *   2. C functions
  *   3. Lua functions
@@ -483,7 +485,7 @@ void free_function_table(FunctionTable *table);
 
 /*************************************************************
  *
- * Finite Element Method in dimension 1. 
+ * Finite Element Method in dimension 1.
  * Stiffness matrix K and load vector F
  *
  *************************************************************/
@@ -493,7 +495,7 @@ typedef struct {
 	int degree;                   /* Degree of the Lagrange Polynomials */
 	Lagrange1DValues lv;          /* Lagrage values at Gauss points */
 	int npoints;                  /* Number of points for Gauss quadrature */
-	GaussQuadrature qdat;         /* Points and weights for Gauss quadrature */ 
+	GaussQuadrature qdat;         /* Points and weights for Gauss quadrature */
 	FunctionTable funs;           /* Table for functions a2, a1, a0 and f */
 	int bctype[2];                /* Type of boundary conditions at xa and xb */
 	DOUBLE bc[2][3];              /* Boundary conditions */
@@ -525,7 +527,7 @@ int writeFEM1DPETScSolutionTXTType(PetscScalar *s,Specification1D spec);
 
 /*************************************************************
  *
- * Finite Element Method in dimension 2. 
+ * Finite Element Method in dimension 2.
  * Stiffness matrix K and load vector F
  *
  *************************************************************/
@@ -547,7 +549,7 @@ DOUBLE integralOverOneTriangleWithOneLagrange(PTriangle tr,unsigned int m1,unsig
 											  FunctionTable item,TWBGaussQuadrature q2,Lagrange2DValues lv);
 
 DOUBLE integralOverOneTriangleWithTwoLagrange(PTriangle tr,unsigned int m1,unsigned int n1,
-											  unsigned int m2,unsigned int n2,unsigned int derivative,  
+											  unsigned int m2,unsigned int n2,unsigned int derivative,
 											  FunctionTable item,TWBGaussQuadrature q2,Lagrange2DValues lv);
 
 DOUBLE integralOverOneTriangleWithTwoLagrangeTest(PTriangle tr,unsigned int m1,unsigned int n1,
@@ -602,6 +604,6 @@ gsl_vector *gsl_gmres_solve(SystemOfEquations system);
  *
  *************************************************************/
 
-PetscScalar *petsc_solve(SystemOfEquations system);
+PetscErrorCode petsc_solve(SystemOfEquations system,PetscScalar **s);
 
 #endif
