@@ -53,110 +53,110 @@
 #define FREE_APPENDED 1
 #define NOT_FREE_APPENDED 0
 
-#define make_vector(v,n) if (((v) = calloc((n),sizeof(*(v)))) == NULL)              \
+#define make_vector(v,n) if (((v) = calloc((n),sizeof(*(v)))) == NULL)          \
 	goto error_malloc;
 
 #define free_vector(v) do { free(v); v = NULL; } while (0)
 
-#define clone_vector(u,v,n) do {                                                    \
-	make_vector(v,(n));                                                             \
-	memcpy(v,(u),(n)*sizeof(*(u)));                                                 \
+#define clone_vector(u,v,n) do {                                                \
+	make_vector(v,(n));                                                           \
+	memcpy(v,(u),(n)*sizeof(*(u)));                                               \
 } while (0)
 
-#define expand_vector(v,n) if (((v) = realloc((v),(n) * sizeof(*(v)))) == NULL)     \
+#define expand_vector(v,n) if (((v) = realloc((v),(n) * sizeof(*(v)))) == NULL) \
 	goto error_malloc;
 
-#define append_to_vector(u,v,m,n,f) do {                                            \
-	if ((u) == NULL)                                                                \
-	{                                                                               \
+#define append_to_vector(u,v,m,n,f) do {                                        \
+	if ((u) == NULL)                                                              \
+	{                                                                             \
 		make_vector((u),(n));                                                       \
-	}                                                                               \
-	else                                                                            \
-	{                                                                               \
+	}                                                                             \
+	else                                                                          \
+	{                                                                             \
 		expand_vector((u),(m)+(n));                                                 \
-	}                                                                               \
-	void *p = u + m;                                                                \
-	memcpy(p,(v),(n)*sizeof(*(v)));                                                 \
-	if((f))                                                                         \
+	}                                                                             \
+	void *p = u + m;                                                              \
+	memcpy(p,(v),(n)*sizeof(*(v)));                                               \
+	if((f))                                                                       \
 		free_vector((v));                                                           \
 } while (0)
 
-#define make_matrix(a, m, n) do {                                                   \
-	make_vector(a, (m) + 1);                                                        \
-	for (size_t make_matrix_loop_counter = 0;                                       \
+#define make_matrix(a, m, n) do {                                               \
+	make_vector(a, (m) + 1);                                                      \
+	for (size_t make_matrix_loop_counter = 0;                                     \
 		make_matrix_loop_counter < (m);                                             \
 		make_matrix_loop_counter++)                                                 \
 		make_vector((a)[make_matrix_loop_counter], (n));                            \
 } while (0)
 
-#define clone_matrix(u,v,m,n) do {		                                            \
-	make_matrix(v,(m),(n));                                                         \
-	for (size_t make_matrix_loop_counter = 0;                                       \
-			make_matrix_loop_counter < (m);                                         \
-			make_matrix_loop_counter++)                                             \
+#define clone_matrix(u,v,m,n) do {		                                          \
+	make_matrix(v,(m),(n));                                                       \
+	for (size_t make_matrix_loop_counter = 0;                                     \
+			make_matrix_loop_counter < (m);                                           \
+			make_matrix_loop_counter++)                                               \
 		memcpy(v[make_matrix_loop_counter],                                         \
-			u[make_matrix_loop_counter],                                            \
-			(n)*sizeof(**(v)));                                                     \
+			u[make_matrix_loop_counter],                                              \
+			(n)*sizeof(**(v)));                                                       \
 } while (0)
 
-#define free_matrix(a) do {                                                         \
-	if (a != NULL) {                                                                \
+#define free_matrix(a) do {                                                     \
+	if (a != NULL) {                                                              \
 		for (size_t make_matrix_loop_counter = 0;                                   \
-				(a)[make_matrix_loop_counter] != NULL;                              \
-				make_matrix_loop_counter++)                                         \
-			free_vector((a)[make_matrix_loop_counter]);                             \
+				(a)[make_matrix_loop_counter] != NULL;                                  \
+				make_matrix_loop_counter++)                                             \
+			free_vector((a)[make_matrix_loop_counter]);                               \
 		free_vector(a);                                                             \
 		a = NULL;                                                                   \
-	}                                                                               \
+	}                                                                             \
 } while (0)
 
-#define print_vector(fmt, v, n) do {                                                \
-	for (size_t print_vector_loop_counter = 0;                                      \
-			print_vector_loop_counter < (n);                                        \
-			print_vector_loop_counter++)                                            \
+#define print_vector(fmt, v, n) do {                                            \
+	for (size_t print_vector_loop_counter = 0;                                    \
+			print_vector_loop_counter < (n);                                          \
+			print_vector_loop_counter++)                                              \
 		printf(fmt, (v)[print_vector_loop_counter]);                                \
-	putchar('\n');                                                                  \
+	putchar('\n');                                                                \
 } while (0)
 
-#define print_matrix(fmt, a, m, n) do {                                             \
-	for (size_t print_matrix_loop_counter = 0;                                      \
-			print_matrix_loop_counter < (m);                                        \
-			print_matrix_loop_counter++)                                            \
+#define print_matrix(fmt, a, m, n) do {                                         \
+	for (size_t print_matrix_loop_counter = 0;                                    \
+			print_matrix_loop_counter < (m);                                          \
+			print_matrix_loop_counter++)                                              \
 		print_vector(fmt, (a)[print_matrix_loop_counter], (n));                     \
 } while (0)
 
-#define make_triangular_matrix(a, n) do {                                           \
-	make_vector(a, (n) + 1);                                                        \
-	for (size_t make_matrix_loop_counter = 0;                                       \
-			make_matrix_loop_counter < (n);                                         \
-			make_matrix_loop_counter++)                                             \
+#define make_triangular_matrix(a, n) do {                                       \
+	make_vector(a, (n) + 1);                                                      \
+	for (size_t make_matrix_loop_counter = 0;                                     \
+			make_matrix_loop_counter < (n);                                           \
+			make_matrix_loop_counter++)                                               \
 		make_vector((a)[make_matrix_loop_counter],                                  \
-			(n) - make_matrix_loop_counter );		                                \
-	(a)[n] = NULL;                                                                  \
+		(n) - make_matrix_loop_counter );		                                        \
+  	(a)[n] = NULL;                                                              \
 } while (0)
 
-#define matrix_to_vector(a,v,m,n,type) do {                                         \
-	type *matrix_vector_pointer;                                                    \
-	matrix_vector_pointer = v;			                                            \
-	for (size_t matrix_vector_loop_counter = 0;                                     \
-			matrix_vector_loop_counter < (n);                                       \
-			matrix_vector_loop_counter++) {		                                    \
+#define matrix_to_vector(a,v,m,n,type) do {                                     \
+	type *matrix_vector_pointer;                                                  \
+	matrix_vector_pointer = v;			                                              \
+	for (size_t matrix_vector_loop_counter = 0;                                   \
+			matrix_vector_loop_counter < (n);                                         \
+			matrix_vector_loop_counter++) {		                                        \
 		memcpy(matrix_vector_pointer,                                               \
 		a[matrix_vector_loop_counter],(n)*sizeof(type));                            \
 		matrix_vector_pointer += (n);                                               \
-	}	           		                                                            \
+	}	           		                                                              \
 } while (0)
 
-#define vector_to_matrix(v,a,m,n,type) do {                                         \
-	type *vector_matrix_pointer;                                                    \
-	vector_matrix_pointer = v;			                                            \
-	for (size_t vector_matrix_loop_counter = 0;                                     \
-			vector_matrix_loop_counter < (m);                                       \
-			vector_matrix_loop_counter++) {		                                    \
+#define vector_to_matrix(v,a,m,n,type) do {                                     \
+	type *vector_matrix_pointer;                                                  \
+	vector_matrix_pointer = v;			                                              \
+	for (size_t vector_matrix_loop_counter = 0;                                   \
+			vector_matrix_loop_counter < (m);                                         \
+			vector_matrix_loop_counter++) {		                                        \
 		memcpy(a[vector_matrix_loop_counter],                                       \
-			vector_matrix_pointer,(n)*sizeof(type));                                \
+			vector_matrix_pointer,(n)*sizeof(type));                                  \
 		vector_matrix_pointer += (n);                                               \
-	}	           		                                                            \
+	}	           		                                                              \
 } while (0)
 
 /*************************************************************

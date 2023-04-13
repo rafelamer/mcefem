@@ -43,10 +43,16 @@ int main(int argc, char **argv)
 		if ((system = StiffnessMatrixAndLoadVector1D(spec1d)) == NULL)
 			goto final;
 
+
+		// print_sparsem_matrix("%.8g  ",system->K);
+		// print_vector("%.18g\n",system->F,system->K->cols);
+
 		if (!strcmp("umfpack",solver))
 		{
 			if ((s1 = umfpack_solve(system->K,system->F)) == NULL)
 				goto final;
+
+			// print_vector("%.18g\n",s1,system->K->cols);
 
 			if ( !strcmp("txt",spec1d->type))
 				if ( !writeFEM1DSolutionTXTType(s1,spec1d))
