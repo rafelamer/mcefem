@@ -1,5 +1,5 @@
 CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/include/petsc $(shell python-config --cflags) $(shell python-config --ldflags)
-LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua5.2 -lpython3.11 -lgsl -lpetsc
+LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua -lpython3.11 -lgsl -lpetsc
 LDFLAGS = -L/usr/local/lib/
 CC = gcc
 TARGET = tfgfem

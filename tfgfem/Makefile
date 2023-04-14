@@ -1,6 +1,6 @@
 CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/include/petsc $(shell python3-config --cflags) $(shell python3-config --ldflags)
 LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua -lpython3.11 -lgsl -lpetsc
-LDFLAGS = -L/usr/local/lib -L/usr/lib64/openmpi/lib/ 
+LDFLAGS = -L/usr/local/lib 
 CC = gcc
 TARGET = tfgfem
 OBJECTS = tfgfem.o cmdline.o
