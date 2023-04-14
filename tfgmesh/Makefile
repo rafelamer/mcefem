@@ -1,5 +1,5 @@
-CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/lib/petscdir/3.10/include/ -I/usr/lib/x86_64-linux-gnu/openmpi/include/ $(shell python-config --cflags) $(shell python-config --ldflags)
-LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua5.2 -lut -lpython2.7 -lgsl -lpetsc -lmpi
+CFLAGS = -O3 -I. -I/usr/include/libxml2 -I/usr/include/petsc $(shell python-config --cflags) $(shell python-config --ldflags)
+LIBS = -ltfgfem -lumfpack -lm -lmatheval -lxml2 -llua5.2 -lpython3.11 -lgsl -lpetsc
 LDFLAGS = -L/usr/local/lib/
 CC = gcc
 TARGET = tfgfem
