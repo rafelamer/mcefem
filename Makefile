@@ -1,5 +1,4 @@
-CFLAGS = -fPIC -O3 -I. -I/usr/include/libxml2 -I/usr/include/python3.11 \
--I/usr/include/petsc
+CFLAGS = -fPIC -O3 -I. -I/usr/include/libxml2 -I/usr/include/python3.13 -I/usr/include/petsc
 CC = gcc
 TARGET = libtfgfem.so.1.0.0
 OBJECTS = triangle.o sparsem.o gauss.o xml.o regions.o mesh.o \
