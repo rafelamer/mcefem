@@ -1,5 +1,9 @@
 # The program
 tfgfem/tfgfem
+tfgmesh/tfgmesh
+
+*/cmdline.h
+*/cmdline.c
 
 # Prerequisites
 *.d
