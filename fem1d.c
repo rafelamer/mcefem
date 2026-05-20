@@ -208,9 +208,9 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 			break;
 
 		case FEM_BC_ROBIN:
-			if (! triplet_form_append_element(t,spec->bc[1][0],unknowns - 1,0))
+			if (! triplet_form_append_element(t,spec->bc[1][0],unknowns - 1,unknowns - 3))
 				goto error_malloc;
-			if (! triplet_form_append_element(t,spec->bc[1][1],unknowns - 1,unknowns - 2))
+			if (! triplet_form_append_element(t,spec->bc[1][1],unknowns - 1,unknowns - 1))
 				goto  error_malloc;
 			s->F[unknowns - 1] = spec->bc[1][2];
 	}
@@ -222,7 +222,7 @@ SystemOfEquations StiffnessMatrixAndLoadVector1D(Specification1D spec)
 		goto error_malloc;
 
 	// print_triplet_form("%.18g\n",t);
-	// print_sparsem_matrix("%.8g  ",s->K);
+	// print_sparsem_matrix("%.18g  ",s->K);
 	// print_vector("%.18g\n",s->F,unknowns);
 
 	error = 0;
