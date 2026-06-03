@@ -182,6 +182,8 @@ SystemOfEquations StiffnessMatrixAndLoadVector2D(Specification2D spec)
 	*/
 	us =  number_of_u_unknowns(mesh,degree);
 	dotus =  number_of_dotu_unknowns(mesh,degree);
+
+	// printf("Number of unknowns: %d\n",us+dotus);
 	
 	if ((s = (SystemOfEquations)malloc(sizeof(system_of_equations))) == NULL)
 		goto error_malloc;
@@ -267,7 +269,7 @@ SystemOfEquations StiffnessMatrixAndLoadVector2D(Specification2D spec)
 			}
 		}
 		/*
-			For the edges of the triangle that are boundary edges, we have to compute
+			For the edges of the triangles that are boundary edges, we have to compute
 			the terms \int_{\Gamma} a(x,y) \phi_{i}(x,y) \partial_{n}u(x,y) ds
 			that apperars at equation i
 		*/

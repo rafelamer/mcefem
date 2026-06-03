@@ -94,6 +94,10 @@ int main(int argc, char **argv)
 	if ((system = StiffnessMatrixAndLoadVector2D(spec2d)) == NULL)
 		goto final;
 
+	int unknowns = number_of_u_unknowns(spec2d->mesh,spec2d->degree) + number_of_dotu_unknowns(spec2d->mesh,spec2d->degree);
+	safe_txt_load_vector(system->F, unknowns);
+	save_txt_sparse_matrix(system->K);
+
 	if (!strcmp("umfpack",solver))
 	{
 		if ((s1 = umfpack_solve(system->K,system->F)) == NULL)
@@ -120,6 +124,9 @@ int main(int argc, char **argv)
 		if ( !strcmp("txt",spec2d->type))
 			if ( !writeFEM2DPETScSolutionTXTType(s2,spec2d))
 				goto final;
+
+		safe_txt_solution(s2, unknowns);
+
 	}
 
 	ret = EXIT_SUCCESS;

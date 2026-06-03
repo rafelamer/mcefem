@@ -255,6 +255,43 @@ error_malloc:
 	return NULL;
 }
 
+void save_txt_sparse_matrix(SparseMatrix r)
+{
+  FILE *fp;
+  if ((fp = fopen("K.txt","w")) == NULL)
+    return;
+  
+  for (unsigned int j = 0;j < r->cols;j++)
+    for (unsigned int p = r->Ap[j];p < r->Ap[j+1];p++)
+      fprintf(fp, "%u %u %.16f\n", r->Ai[p], j, r->Ax[p]);
+
+  fclose(fp);
+}
+
+void safe_txt_load_vector(DOUBLE *F, unsigned int size)
+{
+  FILE *fp;
+  if ((fp = fopen("F.txt","w")) == NULL)
+    return;
+
+  for (unsigned int i = 0;i < size;i++)
+    fprintf(fp, "%.16f\n", F[i]);
+
+  fclose(fp);
+}
+
+void safe_txt_solution(DOUBLE *X, unsigned int size)
+{
+  FILE *fp;
+  if ((fp = fopen("sol.txt","w")) == NULL)
+    return;
+
+  for (unsigned int i = 0;i < size;i++)
+    fprintf(fp, "%.16f\n", X[i]);
+
+  fclose(fp);
+}
+
 static int sparsem_append_element(SparseMatrix r,DOUBLE value,unsigned int row,unsigned int col)
 /*
   The functions that uses sparsem_append_element  must append the elements in the compressed 
@@ -399,7 +436,6 @@ int triplet_form_append_element(TripletForm t,DOUBLE value,unsigned int row,unsi
 error_malloc:
 	return 0;
 }
-
 
 TripletForm triplet_form_read(const char *filename,unsigned char symmetric,unsigned int zero_based)
 {
